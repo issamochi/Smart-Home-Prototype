@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Univision Smart Home — Plans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Fredoka:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1F4B3F;
+    --forest2:#26594A;
+    --sage:#7BA88C;
+    --moss:#4C7A5D;
+    --amber:#D98E4A;
+    --mist:#E7EFE9;
+    --paper:#FAFBF9;
+    --ink:#16281F;
+    --line:#E1E8E2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{ font-family:'Fraunces',serif; }
+  .headline{ font-family:'Fredoka',sans-serif; }
+
+  /* ---- Top nav ---- */
+  .topnav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 8vw; height:68px; background:#fff; border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:20;
+  }
+  .brand{ display:flex; align-items:center; gap:9px; }
+  .brand .mark{
+    width:26px; height:26px; border-radius:50%; background:var(--forest);
+    display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .brand .mark svg{ width:12px; height:12px; }
+  .brand .word{
+    font-family:'Fredoka',sans-serif; font-weight:600; font-size:17px; letter-spacing:.01em; color:var(--ink);
+  }
+  .navlinks{ display:flex; align-items:center; gap:32px; }
+  .navlinks a{
+    font-size:13.8px; font-weight:600; color:#3E5349; text-decoration:none; cursor:pointer;
+  }
+  .navlinks a:hover{ color:var(--forest); }
+  .navlinks .help-btn{
+    border:1px solid var(--line); border-radius:999px; padding:8px 18px;
+    font-size:13.5px; font-weight:700; color:var(--ink); background:#fff; cursor:pointer;
+    font-family:'Manrope',sans-serif;
+  }
+  .navlinks .help-btn:hover{ border-color:var(--forest); color:var(--forest); }
+
+  /* ---- Hero (dark, polished) ---- */
+  .hero{
+    position:relative; overflow:hidden; isolation:isolate;
+    background:linear-gradient(155deg,#20493D 0%, #1B3F35 60%, #17362D 100%);
+    padding:64px 8vw 68px;
+    display:grid; grid-template-columns:1.35fr 1fr; gap:40px; align-items:end;
+  }
+  .hero::before,.hero::after{
+    content:""; position:absolute; z-index:-1; border-radius:50%;
+    border:1px solid rgba(255,255,255,.09);
+  }
+  .hero::before{ width:520px; height:520px; top:-260px; right:-140px; }
+  .hero::after{ width:360px; height:360px; top:-90px; right:-40px; border-color:rgba(123,168,140,.22); }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--sage); font-weight:700; margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--sage); }
+  .hero h1{
+    font-family:'Fredoka',sans-serif;
+    font-size:clamp(32px,4.4vw,50px);
+    font-weight:600; line-height:1.12; margin:0; max-width:14ch; color:#fff;
+  }
+  .hero .side{
+    padding-bottom:6px;
+  }
+  .hero .side p{
+    font-size:14.5px; line-height:1.65; color:#C7DBCD; max-width:34ch; margin:0;
+  }
+  .hero p{
+    font-size:16.5px; line-height:1.6; color:#4B5F55; max-width:58ch; margin:0 0 30px;
+  }
+  .spine-note{
+    display:flex; gap:14px; align-items:flex-start;
+    background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14);
+    border-radius:14px; padding:16px 20px; max-width:660px; margin-top:26px; grid-column:1 / -1;
+  }
+  .spine-note .dot{
+    flex:0 0 auto; width:30px; height:30px; border-radius:50%;
+    background:var(--sage); color:var(--forest); font-weight:800; font-size:14px;
+    display:flex; align-items:center; justify-content:center; margin-top:2px;
+  }
+  .spine-note b{ color:#fff; }
+  .spine-note span{ color:#C7DBCD; font-size:14px; line-height:1.55; display:block; margin-top:2px;}
+
+  .wrap{ padding:56px 8vw 80px; max-width:1240px; margin:0 auto; }
+  .section-head{ margin-bottom:32px; text-align:center; }
+  .section-head .tag{
+    font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--moss); margin-bottom:8px; display:block;
+  }
+  .section-head h2{ font-size:clamp(24px,3vw,32px); font-weight:600; margin:0 0 8px; color:var(--forest); }
+  .section-head p{ color:#556B60; font-size:15px; max-width:60ch; margin:0 auto; line-height:1.6; }
+
+  .packages{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:8px;
+  }
+  .pkg{
+    background:#fff; border:1px solid var(--line); border-radius:18px;
+    padding:28px 26px 26px; position:relative; display:flex; flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .pkg:hover{ transform:translateY(-4px); box-shadow:0 18px 34px -18px rgba(31,75,63,.22); }
+  .pkg.featured{ border-color:var(--forest); box-shadow:0 18px 34px -16px rgba(31,75,63,.2); }
+  .pkg .ribbon{
+    position:absolute; top:-13px; left:26px; background:var(--amber); color:#fff;
+    font-size:11.5px; font-weight:800; letter-spacing:.03em; padding:5px 12px; border-radius:999px;
+  }
+  .pkg .name{ font-family:'Fraunces',serif; font-size:21px; font-weight:600; margin:6px 0 4px; color:var(--forest); }
+  .pkg .devices{ font-size:13.5px; color:#6B7F74; margin-bottom:18px; }
+  .pkg .price{ font-size:32px; font-weight:800; color:var(--forest); }
+  .pkg .price small{ font-size:13px; font-weight:600; color:#6B7F74; }
+  .pkg .sub-price{ font-size:12.5px; color:#84948B; margin:2px 0 20px; }
+  .pkg ul{ list-style:none; margin:0 0 22px; padding:0; flex:1; }
+  .pkg li{
+    font-size:13.8px; color:#233329; padding:8px 0 8px 24px; position:relative; border-top:1px solid #F0F3F1;
+  }
+  .pkg li:first-child{ border-top:none; }
+  .pkg li::before{ content:"✓"; position:absolute; left:0; top:8px; color:var(--moss); font-weight:800; }
+  .pkg button{
+    width:100%; padding:13px; border-radius:11px; border:none; font-weight:700; font-size:14px;
+    background:var(--forest); color:#fff; cursor:pointer; font-family:'Manrope',sans-serif;
+  }
+  .pkg.featured button{ background:var(--forest2); }
+  .pkg button:hover{ opacity:.9; }
+
+  .add-on-strip{
+    margin-top:28px; background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:22px 26px; display:flex; align-items:center; gap:22px; flex-wrap:wrap;
+  }
+  .add-on-strip .label{ font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--moss); flex:0 0 auto; }
+  .add-on-strip .items{ display:flex; gap:10px; flex-wrap:wrap; flex:1; }
+  .add-on-strip .chip{
+    background:var(--mist); border:1px solid var(--line); color:#2E4438; font-size:12.8px; font-weight:600;
+    padding:7px 13px; border-radius:999px;
+  }
+
+  footer{
+    text-align:center; padding:0 8vw 60px; color:#8A9A90; font-size:12.5px; line-height:1.7;
+  }
+  footer b{ color:var(--forest); }
+
+  /* ---- Tabs ---- */
+  .tabs{
+    display:flex; gap:8px; margin-top:30px;
+  }
+  .tab{
+    border:1px solid var(--line); background:#fff; color:#556B60;
+    font-family:'Manrope',sans-serif; font-size:13.5px; font-weight:700;
+    padding:10px 18px; border-radius:999px; cursor:pointer;
+  }
+  .tab.active{ background:var(--forest); border-color:var(--forest); color:#fff; }
+
+  .page{ display:none; }
+  .page.active{ display:block; }
+
+  /* ---- Builder page ---- */
+  .builder-layout{
+    display:grid; grid-template-columns:1fr 300px; gap:28px; align-items:start;
+  }
+  .builder-groups{ display:flex; flex-direction:column; gap:34px; }
+  .group-title{
+    font-size:12px; font-weight:800; letter-spacing:.07em; text-transform:uppercase;
+    color:var(--moss); margin:0 0 14px;
+  }
+  .product-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
+  }
+  .product-card{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:16px 18px; display:flex; align-items:center; gap:14px;
+  }
+  .product-card .icon{
+    flex:0 0 auto; width:42px; height:42px; border-radius:10px; background:var(--mist);
+    display:flex; align-items:center; justify-content:center; font-size:19px;
+  }
+  .product-card .info{ flex:1; min-width:0; }
+  .product-card .info .n{ font-size:14px; font-weight:700; color:var(--ink); }
+  .product-card .info .p{ font-size:12.5px; color:#7A8B82; margin-top:2px; }
+  .stepper{
+    display:flex; align-items:center; gap:0; border:1px solid var(--line); border-radius:9px; overflow:hidden; flex:0 0 auto;
+  }
+  .stepper button{
+    width:28px; height:28px; border:none; background:var(--mist); color:var(--forest);
+    font-size:15px; font-weight:800; cursor:pointer; line-height:1;
+  }
+  .stepper button:hover{ background:#DCE9E0; }
+  .stepper .qty{
+    width:28px; text-align:center; font-size:13.5px; font-weight:700; color:var(--ink);
+  }
+  .service-row{
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:16px 18px; display:flex; align-items:center; gap:14px; margin-bottom:10px;
+  }
+  .service-row .info{ flex:1; }
+  .service-row .info .n{ font-size:14px; font-weight:700; color:var(--ink); }
+  .service-row .info .p{ font-size:12.5px; color:#7A8B82; margin-top:2px; }
+  .toggle-btn{
+    border:1px solid var(--forest); background:#fff; color:var(--forest);
+    font-family:'Manrope',sans-serif; font-weight:700; font-size:12.5px;
+    padding:7px 16px; border-radius:999px; cursor:pointer; flex:0 0 auto;
+  }
+  .toggle-btn.on{ background:var(--forest); color:#fff; }
+
+  /* ---- Summary / total corner ---- */
+  .summary{
+    position:sticky; top:24px;
+    background:var(--forest); color:#fff; border-radius:18px; padding:24px 22px;
+  }
+  .summary h3{ font-size:15px; margin:0 0 4px; font-weight:600; color:#fff; }
+  .summary .hint{ font-size:12px; color:#B8CFC1; margin-bottom:18px; }
+  .summary-lines{ display:flex; flex-direction:column; gap:8px; margin-bottom:16px; min-height:20px; }
+  .summary-line{ display:flex; justify-content:space-between; font-size:12.8px; color:#DCEAE1; }
+  .summary-line b{ color:#fff; font-weight:700; }
+  .summary-empty{ font-size:12.5px; color:#93AC9E; font-style:italic; }
+  .summary-total{
+    border-top:1px solid rgba(255,255,255,.18); padding-top:16px; margin-top:4px;
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .summary-total .label{ font-size:12.5px; color:#B8CFC1; font-weight:600; }
+  .summary-total .amount{ font-size:26px; font-weight:800; }
+  .summary-total .amount small{ font-size:12px; font-weight:600; color:#B8CFC1; }
+  .summary button.cta{
+    width:100%; margin-top:18px; padding:13px; border-radius:11px; border:none;
+    background:var(--amber); color:#fff; font-weight:800; font-size:14px; cursor:pointer;
+    font-family:'Manrope',sans-serif;
+  }
+
+  @media (max-width:860px){
+    .packages{ grid-template-columns:1fr; }
+    .builder-layout{ grid-template-columns:1fr; }
+    .product-grid{ grid-template-columns:1fr; }
+    .summary{ position:static; }
+    .hero{ grid-template-columns:1fr; }
+    .navlinks{ gap:16px; }
+    .navlinks a{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="topnav">
+    <div class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l12-7L8 5z" fill="#fff"/></svg>
+      </span>
+      <span class="word">UNIVISION</span>
+    </div>
+    <nav class="navlinks">
+      <a onclick="navGoTo('page-builder')">Build your own</a>
+      <a onclick="navGoTo('page-plans')">Packages</a>
+      <a href="#services-strip">Services</a>
+      <button class="help-btn">Need help?</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Your home, your way</span>
+      <h1>Build a smart home that fits your life.</h1>
+    </div>
+    <div class="side">
+      <p>Choose every device yourself or continue with a ready-made package. Both options work together in the Univision Smart Home app.</p>
+    </div>
+    <div class="spine-note">
+      <div class="dot">i</div>
+      <span><b>The app subscription is always included</b><br>no matter which devices or how many you choose. Pick the plan that matches your device count and coverage needs.</span>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <div class="tabs">
+      <button class="tab active" data-page="page-plans" onclick="showPage('page-plans', this)">Fixed Plans</button>
+      <button class="tab" data-page="page-builder" onclick="showPage('page-builder', this)">Build Your Package</button>
+    </div>
+
+    <section id="page-plans" class="page active">
+
+    <div class="section-head" style="margin-top:32px;">
+      <span class="tag">Plans</span>
+      <h2>Choose your coverage</h2>
+      <p>Every plan includes the Univision Smart Home app, device financing options, and installation support.</p>
+    </div>
+
+    <div class="packages">
+
+      <div class="pkg">
+        <div class="name">Basic</div>
+        <div class="devices">Up to 1 doorbell + 1 camera</div>
+        <div class="price">₮39,000<small>/mo</small></div>
+        <div class="sub-price">Devices billed separately or leased</div>
+        <ul>
+          <li>App control & automation</li>
+          <li>Push notifications</li>
+          <li>7-day recording history</li>
+          <li>Professional monitoring available as add-on</li>
+        </ul>
+        <button>Choose Basic</button>
+      </div>
+
+      <div class="pkg featured">
+        <div class="ribbon">Most popular</div>
+        <div class="name">Standard</div>
+        <div class="devices">Up to 3 devices — cameras, doorbell, sensors</div>
+        <div class="price">₮65,000<small>/mo</small></div>
+        <div class="sub-price">Devices billed separately or leased</div>
+        <ul>
+          <li>Everything in Basic</li>
+          <li>30-day recording history</li>
+          <li>Multi-camera simultaneous viewing</li>
+          <li>Professional monitoring — 20% off</li>
+        </ul>
+        <button>Choose Standard</button>
+      </div>
+
+      <div class="pkg">
+        <div class="name">Premium</div>
+        <div class="devices">Unlimited devices</div>
+        <div class="price">₮95,000<small>/mo</small></div>
+        <div class="sub-price">Devices billed separately or leased</div>
+        <ul>
+          <li>Everything in Standard</li>
+          <li>Professional monitoring included</li>
+          <li>Priority installation & support</li>
+          <li>Early access to new device categories</li>
+        </ul>
+        <button>Choose Premium</button>
+      </div>
+
+    </div>
+
+    <div class="add-on-strip" id="services-strip">
+      <span class="label">Optional add-ons</span>
+      <div class="items">
+        <span class="chip">Extra cloud storage</span>
+        <span class="chip">Professional monitoring</span>
+        <span class="chip">Installation service</span>
+        <span class="chip">Device upgrades</span>
+      </div>
+    </div>
+
+    </section>
+
+    <section id="page-builder" class="page">
+
+      <div class="section-head" style="margin-top:32px;">
+        <span class="tag">Build Your Package</span>
+        <h2>Pick exactly what you need</h2>
+        <p>Add devices and services one at a time. The subscription is included automatically — the total updates as you go.</p>
+      </div>
+
+      <div class="builder-layout">
+        <div class="builder-groups">
+
+          <div>
+            <div class="group-title">Cameras & doorbells</div>
+            <div class="product-grid">
+              <div class="product-card">
+                <div class="icon">📷</div>
+                <div class="info"><div class="n">Indoor camera</div><div class="p">₮180,000</div></div>
+                <div class="stepper">
+                  <button onclick="changeQty('indoor_cam',-1)">−</button>
+                  <span class="qty" id="qty-indoor_cam">0</span>
+                  <button onclick="changeQty('indoor_cam',1)">+</button>
+                </div>
+              </div>
+              <div class="product-card">
+                <div class="icon">📷</div>
+                <div class="info"><div class="n">Outdoor camera</div><div class="p">₮240,000</div></div>
+                <div class="stepper">
+                  <button onclick="changeQty('outdoor_cam',-1)">−</button>
+                  <span class="qty" id="qty-outdoor_cam">0</span>
+                  <button onclick="changeQty('outdoor_cam',1)">+</button>
+                </div>
+              </div>
+              <div class="product-card">
+                <div class="icon">🔔</div>
+                <div class="info"><div class="n">Video doorbell</div><div class="p">₮210,000</div></div>
+                <div class="stepper">
+                  <button onclick="changeQty('doorbell',-1)">−</button>
+                  <span class="qty" id="qty-doorbell">0</span>
+                  <button onclick="changeQty('doorbell',1)">+</button>
+                </div>
+              </div>
+              <div class="product-card">
+                <div class="icon">🚨</div>
+                <div class="info"><div class="n">Door / window sensor</div><div class="p">₮45,000</div></div>
+                <div class="stepper">
+                  <button onclick="changeQty('sensor',-1)">−</button>
+                  <span class="qty" id="qty-sensor">0</span>
+                  <button onclick="changeQty('sensor',1)">+</button>
+                </div>
+              </div>
+              <div class="product-card">
+                <div class="icon">🔑</div>
+                <div class="info"><div class="n">Smart lock</div><div class="p">₮320,000</div></div>
+                <div class="stepper">
+                  <button onclick="changeQty('lock',-1)">−</button>
+                  <span class="qty" id="qty-lock">0</span>
+                  <button onclick="changeQty('lock',1)">+</button>
+                </div>
+              </div>
+              <div class="product-card">
+                <div class="icon">🌡️</div>
+                <div class="info"><div class="n">Motion / climate sensor</div><div class="p">₮55,000</div></div>
+                <div class="stepper">
+                  <button onclick="changeQty('climate',-1)">−</button>
+                  <span class="qty" id="qty-climate">0</span>
+                  <button onclick="changeQty('climate',1)">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="group-title">Services</div>
+            <div class="service-row">
+              <div class="info"><div class="n">Professional installation</div><div class="p">One-time · ₮80,000</div></div>
+              <button class="toggle-btn" id="svc-install" onclick="toggleService('install', 80000)">Add</button>
+            </div>
+            <div class="service-row">
+              <div class="info"><div class="n">Professional monitoring</div><div class="p">Monthly · ₮25,000/mo</div></div>
+              <button class="toggle-btn" id="svc-monitor" onclick="toggleService('monitor', 25000)">Add</button>
+            </div>
+            <div class="service-row">
+              <div class="info"><div class="n">Extended cloud storage (30-day)</div><div class="p">Monthly · ₮12,000/mo</div></div>
+              <button class="toggle-btn" id="svc-storage" onclick="toggleService('storage', 12000)">Add</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="summary">
+          <h3>Your package</h3>
+          <div class="hint">App subscription included automatically</div>
+          <div class="summary-lines" id="summary-lines">
+            <div class="summary-empty">No devices added yet</div>
+          </div>
+          <div class="summary-total">
+            <span class="label">Estimated total</span>
+            <span class="amount" id="summary-total">₮0<small>/mo*</small></span>
+          </div>
+          <button class="cta">Get this package</button>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <footer>
+    Prototype — based on the MD's feedback. <b>App subscription is always included.</b> Device selection and plan tier are the customer's choice.<br>
+    *Estimated total on the builder page includes a monthly subscription fee that scales with your device count and camera load, plus any monthly services added. One-time services (e.g. installation) are shown separately and billed once.
+  </footer>
+
+  <script>
+    const PRODUCTS = {
+      indoor_cam:  { name: "Indoor camera",  price: 180000 },
+      outdoor_cam: { name: "Outdoor camera", price: 240000 },
+      doorbell:    { name: "Video doorbell", price: 210000 },
+      sensor:      { name: "Door / window sensor", price: 45000 },
+      lock:        { name: "Smart lock", price: 320000 },
+      climate:     { name: "Motion / climate sensor", price: 55000 },
+    };
+    const SUB_BASE = 25000;       // flat platform subscription
+    const SUB_PER_CAMERA = 8000;  // incremental subscription cost driven by camera/doorbell video load
+
+    const qty = Object.fromEntries(Object.keys(PRODUCTS).map(k => [k, 0]));
+    const services = { install: false, monitor: false, storage: false };
+    const servicePrices = { install: 80000, monitor: 25000, storage: 12000 };
+    const serviceLabels = { install: "Professional installation (one-time)", monitor: "Professional monitoring", storage: "Extended cloud storage" };
+    const CAMERA_KEYS = ["indoor_cam", "outdoor_cam", "doorbell"];
+
+    function showPage(id, btn){
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    function navGoTo(id){
+      const btn = document.querySelector('.tab[data-page="' + id + '"]');
+      showPage(id, btn);
+      document.querySelector(".wrap").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function changeQty(key, delta){
+      qty[key] = Math.max(0, qty[key] + delta);
+      document.getElementById("qty-" + key).textContent = qty[key];
+      renderSummary();
+    }
+
+    function toggleService(key, price){
+      services[key] = !services[key];
+      const btn = document.getElementById("svc-" + key);
+      btn.classList.toggle("on", services[key]);
+      btn.textContent = services[key] ? "Added" : "Add";
+      renderSummary();
+    }
+
+    function renderSummary(){
+      const lines = [];
+      let monthly = 0;
+      let oneTime = 0;
+      let deviceCount = 0;
+      let cameraCount = 0;
+
+      Object.keys(PRODUCTS).forEach(key => {
+        if (qty[key] > 0) {
+          const p = PRODUCTS[key];
+          const lineTotal = p.price * qty[key];
+          oneTime += lineTotal;
+          deviceCount += qty[key];
+          if (CAMERA_KEYS.includes(key)) cameraCount += qty[key];
+          lines.push(`<div class="summary-line"><span>${p.name} × ${qty[key]}</span><b>₮${lineTotal.toLocaleString()}</b></div>`);
+        }
+      });
+
+      Object.keys(services).forEach(key => {
+        if (services[key]) {
+          const price = servicePrices[key];
+          if (key === "install") { oneTime += price; }
+          else { monthly += price; }
+          lines.push(`<div class="summary-line"><span>${serviceLabels[key]}</span><b>₮${price.toLocaleString()}${key === "install" ? "" : "/mo"}</b></div>`);
+        }
+      });
+
+      const subscription = deviceCount > 0 ? SUB_BASE + cameraCount * SUB_PER_CAMERA : 0;
+      if (subscription > 0) {
+        lines.push(`<div class="summary-line"><span>App subscription</span><b>₮${subscription.toLocaleString()}/mo</b></div>`);
+      }
+      monthly += subscription;
+
+      document.getElementById("summary-lines").innerHTML = lines.length
+        ? lines.join("")
+        : '<div class="summary-empty">No devices added yet</div>';
+
+      document.getElementById("summary-total").innerHTML =
+        `₮${monthly.toLocaleString()}<small>/mo</small>` +
+        (oneTime > 0 ? ` <small style="display:block;margin-top:2px;">+ ₮${oneTime.toLocaleString()} one-time</small>` : "");
+    }
+
+    renderSummary();
+  </script>
+
+</body>
+</html>
